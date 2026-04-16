@@ -2,8 +2,11 @@ import express from 'express';
 import { Telegraf } from 'telegraf';
 import dotenv from 'dotenv';
 import { registerCommands } from './bot/commands.js';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: resolve(__dirname, '../.env') });
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const WEBHOOK_URL = process.env.WEBHOOK_URL;
