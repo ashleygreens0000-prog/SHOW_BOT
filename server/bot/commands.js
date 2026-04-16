@@ -44,13 +44,14 @@ export function registerCommands(bot, adminId) {
 
   bot.command('start', (ctx) => {
     const webAppUrl = process.env.WEBAPP_URL;
+    const keyboard = webAppUrl
+      ? Markup.inlineKeyboard([[Markup.button.webApp('🎬 Open DY SHOWS', webAppUrl)]])
+      : Markup.inlineKeyboard([]);
     ctx.reply(
-      `🎥 *Welcome to DY SHOWS*\n\nYour premium movie & series streaming bot.\n\nTap the button below to open the app:`,
+      `🎥 *Welcome to DY SHOWS*\n\nYour premium movie & series streaming bot.${webAppUrl ? '\n\nTap the button below to open the app:' : ''}`,
       {
         parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard([
-          [Markup.button.webApp('🎬 Open DY SHOWS', webAppUrl)],
-        ])
+        ...keyboard
       }
     );
   });
